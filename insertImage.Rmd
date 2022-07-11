@@ -1,0 +1,16 @@
+---
+title: "Untitled"
+author: "ManBuXiaoCun"
+date: '2022-07-11'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+![alt text here](C:\Users\teguo\Pictures\01_02.png){width=50%}
+```{r}
+
+```
+
