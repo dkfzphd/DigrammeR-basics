@@ -34,6 +34,7 @@ C -> B    [label='Yes',style=dashed, fontsize=8, color=red]
 
 subgraph cluster_ground_floor {
     bgcolor='grey95'
+    fontname=arial
     label='Ground Floor'
     labelloc='b'
     B;C;
