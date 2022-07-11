@@ -1,5 +1,5 @@
 # DigrammeR-basics
-DigrammeR
+DigrammeR::grViz
 ![image](https://github.com/dkfzphd/DigrammeR-basics/blob/main/Rplot.png))
 
 **CODE**
