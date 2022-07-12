@@ -11,20 +11,26 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r}
+library(extrafonts)
+fonts()# to show current availible fonts
+```
+
 ### Figure 1
 ```{r echo=FALSE}
 library(DiagrammeR)
+
 grViz("
 digraph{
 
 
-node[fontname=arial, fillcolor='#9DD6DF', color='#FF0063', style=filled, shape=oval]
+node[fontname='Arial', fontsize=16,fillcolor='#9DD6DF', color='#FF0063', style=filled, shape=oval]
 A;
 B;
 C;
 D;
 
-edge[fontname=arial, color=blue, style=filled, arrowhead=vee]
+edge[fontname='Calibri', color=blue, style=filled, arrowhead=vee]
 A -> B    [label='A-to-B',fontsize=8]
 D -> C  
 B -> C    [label='No',style=dashed, fontsize=8, color=red]
