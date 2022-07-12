@@ -1,0 +1,28 @@
+---
+title: "Colors"
+author: "ManBuXiaoCun"
+date: '2022-07-12'
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+[Knowledge Base](https://bookdown.org/xiangyun/msg/elements.html#sec:palette)
+```{r}
+colors()
+```
+
+```{r}
+pdf("colors-bar.pdf", height = 120)
+par(mar = c(0, 10, 3, 0) + 0.1, yaxs = "i")
+barplot(rep(1, length(colors())),
+  col = rev(colors()), names.arg = rev(colors()), horiz = TRUE,
+  las = 1, xaxt = "n", main = expression("Bars of colors in" ~ italic(colors()))
+)
+dev.off()
+```
+
