@@ -56,7 +56,7 @@ subgraph cluster_ground_floor {
 grViz("
 digraph{
 
-node[fontname=arial, fillcolor='#9DD6DF', color='#FF0063', style=filled, shape=oval]
+node[fontname='Calibri', fillcolor='#9DD6DF', color='#FF0063', style=filled, shape=oval]
 
 Statistics; Experiment; Data_Storage;
 
@@ -81,7 +81,7 @@ Data_readio -> Data_Storage -> Data_readio -> Analysis -> Report -> Data_Storage
 grViz("
 digraph{
 
-node[fontname=arial, fillcolor='#9DD6DF', color='#FF0063', style=filled, shape=oval]
+node[fontname='Arial Black', fillcolor='#9DD6DF', color='#FF0063', style=filled, shape=oval]
 
 
 
