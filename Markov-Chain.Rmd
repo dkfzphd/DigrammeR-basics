@@ -26,7 +26,7 @@ A;
 B;
 C;
 
-edge[fontname='Calibri', color=blue, style=filled, arrowhead=vee, arrowsize=0.68]
+edge[fontname='Calibri', color=blue, style=filled, arrowhead=vee, arrowsize=0.4]
 A:w -> B    [label='0.45',fontsize=8, fontcolor='red']
 A -> A      [label='0.2',fontsize=8]
 A:s -> C    [label='0.2', fontsize=8]
@@ -44,3 +44,30 @@ subgraph{rank=same; B; C}
 ")
 ```
 
+## Markov chain (stationary state)
+```{r}
+grViz("
+      digraph{
+      
+node[fontname='Arial', fontsize=16, fillcolor='white', color='#1e1b18', style=filled, shape=oval]
+A;
+B;
+C;
+
+edge[fontname='Calibri', color='#941b0c', style=filled, arrowhead=vee, arrowsize=0.4]
+A:w -> B    [label='0.45',fontsize=8, fontcolor='blue']
+A -> A      [label='0.2',fontsize=8]
+A:s -> C    [label='0.2', fontsize=8]
+B -> C      [label='0.45', fontsize=8]
+B:w -> B    [label='0.15', fontsize=8]
+B:ne -> A   [label='0.2',fontsize=8]
+C -> B      [label='0.4', fontsize=8]
+C -> C      [label='0.35', fontsize=8]
+C:ne -> A   [label='0.6', fontsize=8]
+
+subgraph{rank=same; A}
+subgraph{rank=same; B; C}
+
+  }
+")
+```
