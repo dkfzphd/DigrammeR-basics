@@ -29,7 +29,7 @@ C;
 edge[fontname='Calibri', color=blue, style=filled, arrowhead=vee, arrowsize=0.68]
 A:w -> B    [label='0.45',fontsize=8, fontcolor='red']
 A -> A      [label='0.2',fontsize=8]
-A:s -> C    [label='0.2',fontsize=8]
+A:s -> C    [label='0.2', fontsize=8]
 B -> C      [label='0.45', fontsize=8]
 B:w -> B    [label='0.15', fontsize=8]
 B:ne -> A   [label='0.2',fontsize=8]
