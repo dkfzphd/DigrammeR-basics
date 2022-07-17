@@ -1616,8 +1616,8 @@ subgraph{rank=same; B; C}
 
   }
 &quot;)</code></pre>
-<div id="htmlwidget-d815e670a7a532440ab6" style="width:672px;height:480px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-d815e670a7a532440ab6">{"x":{"diagram":"\n      digraph{\n      \nnode[fontname=\"Arial\", fontsize=16,fillcolor=\"#9DD6DF\", color=\"#FF0063\", style=filled, shape=oval]\nA;\nB;\nC;\n\nedge[fontname=\"Calibri\", color=blue, style=filled, arrowhead=vee, arrowsize=0.4]\nA:w -> B    [label=\"0.45\",fontsize=8, fontcolor=\"red\"]\nA -> A      [label=\"0.2\",fontsize=8]\nA:s -> C    [label=\"0.2\", fontsize=8]\nB -> C      [label=\"0.45\", fontsize=8]\nB:w -> B    [label=\"0.15\", fontsize=8]\nB:ne -> A   [label=\"0.2\",fontsize=8]\nC -> B      [label=\"0.4\", fontsize=8]\nC -> C      [label=\"0.35\", fontsize=8]\nC:ne -> A   [label=\"0.6\", fontsize=8]\n\nsubgraph{rank=same; A}\nsubgraph{rank=same; B; C}\n\n  }\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-815b94fc528b5452b3f1" style="width:672px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-815b94fc528b5452b3f1">{"x":{"diagram":"\n      digraph{\n      \nnode[fontname=\"Arial\", fontsize=16,fillcolor=\"#9DD6DF\", color=\"#FF0063\", style=filled, shape=oval]\nA;\nB;\nC;\n\nedge[fontname=\"Calibri\", color=blue, style=filled, arrowhead=vee, arrowsize=0.4]\nA:w -> B    [label=\"0.45\",fontsize=8, fontcolor=\"red\"]\nA -> A      [label=\"0.2\",fontsize=8]\nA:s -> C    [label=\"0.2\", fontsize=8]\nB -> C      [label=\"0.45\", fontsize=8]\nB:w -> B    [label=\"0.15\", fontsize=8]\nB:ne -> A   [label=\"0.2\",fontsize=8]\nC -> B      [label=\"0.4\", fontsize=8]\nC -> C      [label=\"0.35\", fontsize=8]\nC:ne -> A   [label=\"0.6\", fontsize=8]\n\nsubgraph{rank=same; A}\nsubgraph{rank=same; B; C}\n\n  }\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="markov-chain-stationary-state-1" class="section level2">
 <h2>Markov chain (stationary state)</h2>
@@ -1629,7 +1629,7 @@ A;
 B;
 C;
 
-edge[fontname=&#39;Calibri&#39;, color=&#39;#941b0c&#39;, style=filled, arrowhead=vee, arrowsize=0.4]
+edge[fontname=&#39;Calibri&#39;, color=&#39;#941b0c&#39;, style=filled, arrowhead=normal, arrowsize=0.4]
 A:w -&gt; B    [label=&#39;0.45&#39;,fontsize=8, fontcolor=&#39;blue&#39;]
 A -&gt; A      [label=&#39;0.2&#39;,fontsize=8]
 A:s -&gt; C    [label=&#39;0.2&#39;, fontsize=8]
@@ -1639,14 +1639,17 @@ B:ne -&gt; A   [label=&#39;0.2&#39;,fontsize=8]
 C -&gt; B      [label=&#39;0.4&#39;, fontsize=8]
 C -&gt; C      [label=&#39;0.35&#39;, fontsize=8]
 C:ne -&gt; A   [label=&#39;0.6&#39;, fontsize=8]
-
+C -&gt; D
+D -&gt; E
+E -&gt; B
+D -&gt; F
 subgraph{rank=same; A}
-subgraph{rank=same; B; C}
+subgraph{rank=same; B; C; }
 
   }
 &quot;)</code></pre>
-<div id="htmlwidget-b36e0302c9a9ceda4e31" style="width:672px;height:480px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-b36e0302c9a9ceda4e31">{"x":{"diagram":"\n      digraph{\n      \nnode[fontname=\"Arial\", fontsize=16, fillcolor=\"white\", color=\"#1e1b18\", style=filled, shape=oval]\nA;\nB;\nC;\n\nedge[fontname=\"Calibri\", color=\"#941b0c\", style=filled, arrowhead=vee, arrowsize=0.4]\nA:w -> B    [label=\"0.45\",fontsize=8, fontcolor=\"blue\"]\nA -> A      [label=\"0.2\",fontsize=8]\nA:s -> C    [label=\"0.2\", fontsize=8]\nB -> C      [label=\"0.45\", fontsize=8]\nB:w -> B    [label=\"0.15\", fontsize=8]\nB:ne -> A   [label=\"0.2\",fontsize=8]\nC -> B      [label=\"0.4\", fontsize=8]\nC -> C      [label=\"0.35\", fontsize=8]\nC:ne -> A   [label=\"0.6\", fontsize=8]\n\nsubgraph{rank=same; A}\nsubgraph{rank=same; B; C}\n\n  }\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-77fd6fbe3b7236623ff4" style="width:672px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-77fd6fbe3b7236623ff4">{"x":{"diagram":"\n      digraph{\n      \nnode[fontname=\"Arial\", fontsize=16, fillcolor=\"white\", color=\"#1e1b18\", style=filled, shape=oval]\nA;\nB;\nC;\n\nedge[fontname=\"Calibri\", color=\"#941b0c\", style=filled, arrowhead=normal, arrowsize=0.4]\nA:w -> B    [label=\"0.45\",fontsize=8, fontcolor=\"blue\"]\nA -> A      [label=\"0.2\",fontsize=8]\nA:s -> C    [label=\"0.2\", fontsize=8]\nB -> C      [label=\"0.45\", fontsize=8]\nB:w -> B    [label=\"0.15\", fontsize=8]\nB:ne -> A   [label=\"0.2\",fontsize=8]\nC -> B      [label=\"0.4\", fontsize=8]\nC -> C      [label=\"0.35\", fontsize=8]\nC:ne -> A   [label=\"0.6\", fontsize=8]\nC -> D\nD -> E\nE -> B\nD -> F\nsubgraph{rank=same; A}\nsubgraph{rank=same; B; C; }\n\n  }\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 
 

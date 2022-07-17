@@ -54,7 +54,7 @@ A;
 B;
 C;
 
-edge[fontname='Calibri', color='#941b0c', style=filled, arrowhead=vee, arrowsize=0.4]
+edge[fontname='Calibri', color='#941b0c', style=filled, arrowhead=normal, arrowsize=0.4]
 A:w -> B    [label='0.45',fontsize=8, fontcolor='blue']
 A -> A      [label='0.2',fontsize=8]
 A:s -> C    [label='0.2', fontsize=8]
@@ -64,9 +64,12 @@ B:ne -> A   [label='0.2',fontsize=8]
 C -> B      [label='0.4', fontsize=8]
 C -> C      [label='0.35', fontsize=8]
 C:ne -> A   [label='0.6', fontsize=8]
-
-subgraph{rank=same; A}
-subgraph{rank=same; B; C}
+C:s -> D
+D:s -> E
+D -> F:n
+F:w -> B
+subgraph{rank=same; A; }
+subgraph{rank=same; B; C;}
 
   }
 ")
