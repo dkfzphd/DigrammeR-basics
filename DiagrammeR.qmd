@@ -1,0 +1,109 @@
+---
+title: "Get-It-Done"
+author: "GT"
+format: html
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+
+```{r, setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Figure 1
+```{r, echo=FALSE}
+library(DiagrammeR)
+
+grViz("
+digraph{
+
+rankdir=TD;
+
+node[fontname='Arial', fontsize=16,fillcolor='#9DD6DF', color='#FF0063', style=filled, shape=oval]
+A;
+B;
+C;
+D;
+
+edge[fontname='Calibri', color=blue, style=filled, arrowhead=vee]
+A -> B    [label='A-to-B',fontsize=8]
+D -> C  
+B -> C    [label='No',style=dashed, fontsize=8, color=red]
+B -> B    [label='self-feed', color=red, fontsize=8]
+B -> D
+C -> B    [label='Yes',style=dashed, fontsize=8, color=red]
+
+subgraph cluster_ground_floor {
+    bgcolor='grey95'
+    fontname=arial
+    label='Ground Floor'
+    labelloc='b'
+    B;C;
+}
+  
+
+
+}",height=500)
+```
+
+### Figure 2
+```{r, echo=FALSE}
+
+grViz("
+
+digraph{
+
+rankdir=TD;
+
+node[fontname='Calibri', fillcolor='#9DD6DF', color='#FF0063', style=filled, shape=oval]
+
+Statistics; Experiment; Data_Storage;
+
+edge[fontname=arial, color=blue, style=filled, arrowhead=vee]
+
+Statistics -> Experiment 
+Experiment -> Molecular_part -> rawData -> Data_Storage
+Experiment -> Animal_part -> rawData
+Data_readio -> Data_Storage -> Data_readio -> Analysis -> Report -> Data_Storage
+
+
+
+
+
+
+}",height=800)
+
+```
+
+### Figure 3
+```{r, echo=FALSE}
+grViz("
+digraph{
+
+node[fontname='Arial Black', fillcolor='#9DD6DF', color='#FF0063', style=filled, shape=oval]
+
+
+
+edge[fontname=arial, color=blue, style=filled, arrowhead=vee]
+
+A -> B
+B -> C
+C -> D [fontname=arial, label='C-to-D', fontsize=8]
+D -> A
+
+subgraph{rank=same; D;B}
+subgraph{rank=same; C}
+
+}",
+height = 400)
+
+```
+
+```{r}
+x <- -seq(-5, 5, by=0.01)
+y <- x^2
+plot(x,y,type='l', col='#d90429',lwd=5)
+```
+

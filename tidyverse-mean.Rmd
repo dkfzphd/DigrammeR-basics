@@ -1,0 +1,61 @@
+---
+title: "Untitled"
+author: "ManBuXiaoCun"
+date: "2022-07-27"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+dfrun1 <- DNase |> filter(Run==1)
+ggplot(dfrun1,aes(x=conc,y=density))+
+         geom_jitter()
+      
+       
+```
+
+
+```{r}
+library(tidyverse)
+library(ggsci)
+ggplot(DNase,aes(x=conc,y=density, color=Run))+
+         geom_jitter()+
+         scale_color_aaas()
+      
+       
+```
+
+```{r}
+df1 <- DNase |> unite(newNAME,Run,conc,sep = '_')
+df2 <- left_join(df1,DNase,by='density')
+```
+
+```{r}
+iris %>%                                        # Specify data frame
+  group_by(Species) %>%                         # Specify group indicator
+  summarise_at(vars(Sepal.Length),              # Specify column
+               list(name = max))                # Specify function
+ 
+```
+
+```{r}
+df3 <- df1 |> group_by(newNAME) |> summarise_at(vars(density),
+                                         list(density.mean=mean)
+  
+)
+```
+
+```{r}
+maxes = replicate(100000, {
+  max(rpois(100, 0.5))
+})
+table(maxes)
+
+```
+

@@ -36,16 +36,9 @@ B:ne -> A   [label='0.2',fontsize=8]
 C -> B      [label='0.4', fontsize=8]
 C -> C      [label='0.35', fontsize=8]
 C:ne -> A   [label='0.6', fontsize=8]
-C -> D
+
 subgraph{rank=same; A}
 subgraph{rank=same; B; C}
-subgraph cluster_ground_floor {
-    bgcolor='grey95'
-    fontname=arial
-    label='Ground Floor'
-    labelloc='b'
-    D;E;
-}
 
   }
 ")

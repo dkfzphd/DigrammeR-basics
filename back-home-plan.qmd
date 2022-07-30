@@ -1,0 +1,57 @@
+---
+title: "Get-It-Done"
+author: "GT"
+format: html
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+## 毕业流程
+
+
+```{r, echo=FALSE}
+library(DiagrammeR)
+
+grViz("
+digraph flowchat{
+
+  # several 'node' statements
+  node [shape = oval, fontname = Helvetica, fillcolor='#e9a3c9',                       
+        color='#e9a3c9',style=filled]
+  
+  论文;
+  答辩申请文件;
+  学院蓝表;
+  生科院申请文件;
+  答辩委员会;
+  
+  # set other 'node's statements
+  node [shape = oval, fontname = Helvetica, color='#a1d76a', fillcolor='#a1d76a', style=filled]
+  委员1
+  委员2
+  委员3
+  委员4
+  
+  
+  # several 'edge' statements
+  edge[color='#0a9396',style=filled,arrowhead=vee]
+  
+  论文 -> 答辩申请文件 [label='yes',style=solid, fontsize=8, color='#0a9396']
+  生科院申请文件 -> 答辩申请文件 [label='to do',style=dashed, fontsize=8, color='#0a9396']
+  学院蓝表 -> 答辩申请文件 [label='to do',style=dashed, fontsize=8, color='#0a9396']
+  
+  I -> 委员1 [label='1-week',style=solid, fontsize=8, color='#0a9396']
+  委员1 -> 答辩委员会
+  I -> 委员2 -> 答辩委员会
+  I -> 委员3 -> 答辩委员会
+  I -> 委员4 -> 答辩委员会
+  
+  答辩委员会 -> 网站申请
+  答辩申请文件-> 网站申请
+  网站申请 -> week_31
+  week_31 -> 论文检查期 -> week_41 -> 现场答辩 -> 后续
+  
+}")
+```
+

@@ -1,0 +1,126 @@
+---
+title: "Untitled"
+format: html
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+## https://www.huber.embl.de/msmb/Chap-Generative.html
+```{r}
+library(tidyverse)
+```
+
+
+```{r}
+genotype = c("AA","AO","BB","AO","OO","AO","AA","BO","BO",
+             "AO","BB","AO","BO","AB","OO","AB","BB","AO","AO")
+table(genotype)
+```
+
+```{r}
+df1 <- rbinom(1e3, prob = 0.2, size = 1)
+df1
+table(df1)
+probabilities = dbinom(0:15, prob = 0.3, size = 15)
+barplot(probabilities, names.arg = 0:15, col = "red")
+hist(probabilities)
+dbinom(3, prob = 2/3, size = 4)
+```
+
+```{r}
+library("BSgenome.Ecoli.NCBI.20080805")
+Ecoli
+shineDalgarno = "AGGAGGT"
+ecoli = Ecoli$NC_010473
+window = 50000
+starts = seq(1, length(ecoli) - window, by = window)
+ends   = starts + window - 1
+numMatches = vapply(seq_along(starts), function(i) {
+  countPattern(shineDalgarno, ecoli[starts[i]:ends[i]],
+               max.mismatch = 0)
+  }, numeric(1))
+table(numMatches)
+```
+
+```{r}
+data("volcano")
+volcanoData = list(
+  x = 10 * seq_len(nrow(volcano)),
+  y = 10 * seq_len(ncol(volcano)),
+  z = volcano,
+  col = terrain.colors(500)[cut(volcano, breaks = 500)]
+)
+library("rgl")
+with(volcanoData, persp3d(x, y, z, color = col))
+```
+
+```{r}
+volume = function(rho, nu)
+            pi^(nu/2) * rho^nu / gamma(nu/2+1)
+
+ggplot(tibble(nu    = 1:15,
+  Omega = volume(1, nu)), aes(x = nu, y = Omega)) +
+geom_line() +
+xlab(expression(nu)) + ylab(expression(Omega)) +
+geom_text(label =
+"Omega(rho,nu)==frac(pi^frac(nu,2)~rho^nu, Gamma(frac(nu,2)+1))",
+  parse = TRUE, x = 6, y = 1.5)
+```
+
+```{r}
+library("ggbio")
+data("hg19IdeogramCyto", package = "biovizBase")
+plotIdeogram(hg19IdeogramCyto, subchr = "chr1")
+```
+
+```{r}
+library(mosaics)
+data(binTFBS)
+
+```
+
+```{r}
+set.seed(12345)
+library(ggplot2)
+library(ggbeeswarm)
+library(ggsci)
+#compare to jitter
+ggplot(iris,aes(Species, Sepal.Length, color=Species)) + 
+  geom_beeswarm()+
+  geom_violin(alpha=0)+
+  theme_classic()
+
+```
+
+```{r}
+ggplot(iris,aes(Species, Sepal.Length, color=Species)) + 
+  geom_quasirandom()+
+  geom_violin(alpha = 0, color = "black")+
+  geom_boxplot(width=0.1,alpha=0, color='gray45')+
+  scale_color_aaas()+
+  theme_classic()
+
+```
+
+```{r}
+library("ggbeeswarm")
+data("PlantGrowth")
+ggplot(PlantGrowth, aes(y = weight, x = group, col = group)) +
+  geom_beeswarm() + theme(legend.position = "none")
+tt = with(PlantGrowth,
+          t.test(weight[group =="ctrl"],
+                 weight[group =="trt2"],
+                 var.equal = TRUE))
+tt
+```
+
+```{r}
+library("DESeq2")
+library("airway")
+data("airway")
+aw   = DESeqDataSet(se = airway, design = ~ cell + dex)
+aw   = DESeq(aw)
+awde = as.data.frame(results(aw)) |> dplyr::filter(!is.na(pvalue))
+```
+

@@ -1,0 +1,213 @@
+---
+title: "Prob Simulation"
+author: "ManBuXiaoCun"
+date: '2022-07-25'
+output:
+  pdf_document: default
+  html_document: default
+editor_options:
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE, warning=FALSE, message=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Coin toss
+```{r}
+size_n <- 100
+
+coin_toss <- sample(c(0,1),size = size_n,replace = TRUE, prob = c(0.5,0.5))
+
+table(coin_toss)
+
+```
+
+Coin toss show head probability = p
+```{r}
+p <- 0.5
+p1 <- 0.3
+n <- seq(1, 20, by = 1)
+
+y <- p * (1 - p)^(n - 1) # Coin toss first time show head calculate each n
+y1 <- p1 * (1 - p1)^(n - 1)
+
+plot(n, y, type = "b", pch = 19, col = "#d62828")
+
+
+```
+
+```{r, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(ggthemes)
+library(ggpubr)
+library(ggsci)
+head(mpg)
+ggplot(mpg, aes(x = displ, y = hwy, color = factor(cyl))) +
+  geom_point() +
+  scale_color_aaas()
+
+
+```
+
+```{r}
+ggplot(mpg, aes(drv, hwy, color=drv)) + 
+  geom_violin(color='black', alpha=0.0)+
+  geom_boxplot(width=0.15)+
+  geom_jitter(width = 0.2, alpha=0.5)+
+  scale_color_aaas()+
+  theme_pubr()
+```
+
+
+```{r}
+data(Oxboys, package = "nlme")
+ggplot(Oxboys, aes(age, height)) +
+  geom_line(aes(group = Subject), color = "gray90") +
+  geom_smooth(method = "lm", size = 1, se = TRUE) +
+  theme_pubr()
+```
+
+```{r}
+technology <- data.table::fread('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-07-19/technology.csv')
+
+```
+
+```{r}
+unique(technology$group)
+df1 <- technology |> filter(iso3c==c('AFG','CHN','GBR','DEU')) |> filter(variable=='elec_cons')
+```
+
+```{r}
+plot1 <- ggplot(df1,aes(x = year, y = value/1e12, group = group, color=iso3c))+
+            geom_point()+
+            geom_line(aes(group=iso3c))+
+            labs(y='Elec_Consumption in trillion',
+                 x=NULL)+
+            scale_color_aaas()
+plot1
+plot1 <- plot1 +  scale_x_continuous(breaks=seq(1960,2020,by=8))
+plot1+theme_pubr()
+plot1+theme_fivethirtyeight()
+plot1+theme_classic2()
+plot1+theme_bw()
+```
+
+```{r}
+library(GGRidge)
+library(ggplot2)
+
+    
+ggplot(diamonds, aes(x = price, y = cut)) +
+  geom_density_ridges(scale = 4) + 
+  scale_y_discrete(expand = c(0, 0)) +     # will generally have to set the `expand` option
+  scale_x_continuous(expand = c(0, 0)) +   # for both axes to remove unneeded padding
+  coord_cartesian(clip = "off") + # to avoid clipping of the very top of the top ridgeline
+  theme_ridges()
+#> Picking joint bandwidth of 458
+```
+
+```{r}
+library(rayrender)
+
+scene = generate_ground(material=diffuse(checkercolor="grey20")) %>%
+  add_object(sphere(y=0.2,material=glossy(color="#2b6eff",reflectance=0.05))) 
+render_scene(scene, parallel = TRUE, width = 800, height = 800, samples = 1000)
+```
+
+```{r}
+scene = generate_ground(material=diffuse(checkercolor="grey20")) %>%
+  add_object(sphere(y=0.2,material=glossy(color="#2b6eff",reflectance=0.05))) %>%
+  add_object(sphere(y=6,z=1,radius=4,material=light(intensity=8))) %>%
+  add_object(sphere(z=15,material=light(intensity=70)))
+render_scene(scene, parallel = TRUE, width = 800, height = 800, samples = 1000, clamp_value=10)
+```
+
+
+```{r}
+generate_ground(material=diffuse(checkercolor="grey20")) %>%
+  add_object(csg_object(csg_combine(
+    csg_combine(
+      csg_box(),
+      csg_sphere(radius=0.707),
+      operation="intersection"),
+    csg_group(list(csg_cylinder(start=c(-1,0,0), end=c(1,0,0), radius=0.4),
+                   csg_cylinder(start=c(0,-1,0), end=c(0,1,0), radius=0.4),
+                   csg_cylinder(start=c(0,0,-1), end=c(0,0,1), radius=0.4))),
+    operation="subtract"),
+    material=glossy(color="red"))) %>%
+  add_object(csg_object(csg_translate(csg_combine(
+    csg_onion(csg_onion(csg_onion(csg_sphere(radius=0.3), 0.2), 0.1),0.05),
+    csg_box(y=1,width=c(10,2,10)), operation = "subtract"), x=1.3),
+    material=glossy(color="purple"))) %>%
+  add_object(csg_object(csg_combine(
+     csg_sphere(x=-1.2,z=-0.3, y=0.5,radius = 0.4),
+     csg_sphere(x=-1.4,z=0.4, radius = 0.4), operation="blend", radius=0.5),
+     material=glossy(color="dodgerblue4"))) %>%
+  add_object(sphere(y=5,x=3,radius=1,material=light(intensity=30))) %>%
+  render_scene(clamp_value=10, fov=20,lookfrom=c(5,5,10),samples=1000,width=800,height=800)
+```
+
+```{r}
+library(deSolve)
+parameters = c(s = 10, r = 28, b = 8/3)
+state = c(X = 1, Y = 0, Z = 1)
+
+Lorenz = function(t, state, parameters) {
+  with(as.list(c(state, parameters)), {
+    dX = s * (Y - X)
+    dY = X * (r - Z) - Y
+    dZ = X * Y - b * Z
+    list(c(dX, dY, dZ))
+  })
+}
+
+times = seq(0, 50, by = 0.05)
+vals = ode(y = state, times = times, func = Lorenz, parms = parameters)[,-1]
+
+#scale and rearrange:
+vals = vals[,c(1,3,2)]/20
+
+generate_studio() %>% 
+  add_object(path(points=vals,y=-0.6,width=0.01,material=diffuse(color="red"))) %>% 
+  add_object(sphere(y=5,z=5,radius=0.5,material=light(intensity=200))) %>% 
+  render_scene(samples=256,lookat=c(0,0.5,0),lookfrom=c(0,1,10),width = 800, height = 800, 
+               clamp_value=10,parallel=TRUE)
+```
+
+```{r}
+tempfilehdr = tempfile(fileext = ".hdr")
+download.file("https://www.tylermw.com/data/venice_sunset_2k.hdr",tempfilehdr)
+
+#Create star polygon
+angles = seq(0,360,by=36)
+xx = rev(c(rep(c(1,0.5),5),1) * sinpi(angles/180))
+yy = rev(c(rep(c(1,0.5),5),1) * cospi(angles/180))
+star_polygon = data.frame(x=xx,y=yy)
+hollow_star = rbind(star_polygon,0.8*star_polygon)
+
+generate_ground(material = diffuse(color="grey20", checkercolor = "grey50",sigma=90)) %>%
+  add_object(sphere(material=metal())) %>%
+  add_object(obj_model(y=-1,x=-1.8,r_obj(), angle=c(0,135,0),material = diffuse(sigma=90))) %>%
+  add_object(pig(x=1.8,y=-1.2,scale=0.5,angle=c(0,90,0),diffuse_sigma = 90)) %>%
+  add_object(extruded_polygon(hollow_star,top=-0.5,bottom=-1, z=-2,
+                              hole = nrow(star_polygon),
+                              material=diffuse(color="red",sigma=90))) %>%
+  render_scene(parallel = TRUE, environment_light = tempfilehdr, width=800,height=800,
+               fov=70,clamp_value=10,samples=1000, aperture=0.1,
+               lookfrom=c(-0.9,1.2,-4.5),lookat=c(0,-1,0))
+```
+
+```{r}
+scene = generate_cornell()
+render_scene(scene, lookfrom=c(278,278,-800),lookat = c(278,278,0), aperture=0, fov=40, samples = 1000,
+             ambient_light=FALSE, parallel=TRUE, width=800, height=800, clamp_value = 5)
+```
+
+```{r}
+tempfileplot = tempfile()
+png(filename=tempfileplot,height=1600,width=1600)
+plot(iris$Petal.Length,iris$Sepal.Width,col=iris$Species,pch=18,cex=12)
+dev.off()
+```
+
